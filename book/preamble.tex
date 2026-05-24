@@ -1,0 +1,145 @@
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+% ============================================================================
+% Макет по образцу серии «МЗ Пресс — МФТИ» (Натан, Горбачёв, Гуз, 2007 и др.):
+% A5, Times, 11 pt, одинарный интервал, абзац 10 mm, поля ~1,6–1,8 cm.
+% ============================================================================
+
+\usepackage{tempora}
+
+\usepackage{amsmath}
+\usepackage{newtxmath}  % не подключать amssymb/amsfonts --- дублируют \Bbbk и др.
+
+\usepackage[
+  a5paper,
+  twoside,
+  inner=1.8cm,
+  outer=1.8cm,
+  top=1.7cm,
+  bottom=2.3cm,
+  bindingoffset=3mm,
+  headheight=12pt,
+  headsep=8pt,
+  footskip=20pt
+]{geometry}
+
+\usepackage{setspace}
+\singlespacing
+
+\setlength{\parindent}{1.0cm}
+\setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\normalsize\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\normalsize\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+\usepackage{microtype}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{indentfirst}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,listings}
+
+\hypersetup{colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black}
+
+% Арабская нумерация с титула; без сброса счётчика при \mainmatter.
+\makeatletter
+\renewcommand\frontmatter{%
+  \if@twoside
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \@mainmatterfalse
+  \pagenumbering{arabic}%
+}
+\renewcommand\mainmatter{%
+  \if@twoside
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \@mainmattertrue
+}
+\makeatother
+
+% Оглавление: главы и \section, без \subsection и \subsubsection.
+\setcounter{tocdepth}{1}
+
+\DeclareMathOperator*{\plim}{\mathop{plim}}
+\DeclareMathOperator{\prob}{\mathbf{P}\!}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\corr}{corr}
+\DeclareMathOperator{\med}{med}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\diag}{diag}
+
+\DeclareMathOperator{\logit}{logit}
+\DeclareMathOperator{\FWER}{FWER}
+\DeclareMathOperator{\FDR}{FDR}
+\DeclareMathOperator{\FDP}{FDP}
+
+\newtheorem{definition}{Определение}[chapter]
+\newtheorem{remark}{Замечание}[chapter]
+
+\newtcblisting{codefragment}{
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    language=Python,
+  },
+  colback=gray!10,colframe=gray!50,breakable
+}
+
+\newcommand{\FigDir}{figures}
+\newcommand{\FigWidth}{0.92\linewidth}  % полная ширина иллюстрации на A5
+
+% Репозиторий курса ПСАД (данные лабораторных работ).
+\newcommand{\PSADRepo}{\url{https://github.com/andriygav/PSAD}}
+\newcommand{\PSADPath}[1]{\url{https://github.com/andriygav/PSAD/tree/master/#1}}
+
+% Карточка критерия (формат слайдов лекции: выборка, H_0, T, null, p).
+\newenvironment{critcard}[1]{%
+  \par\medskip\noindent\textbf{#1}\par\smallskip
+  \begingroup\footnotesize
+  \setlength{\tabcolsep}{4pt}%
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.71\linewidth}@{}}%
+}{%
+  \end{tabular}\endgroup\par\medskip
+}
+
+% Таблица обозначений: обычный tabular (tabularx ломается при \begin/\end в макросах).
+\newcommand{\NotationTableBegin}{%
+  \par\addvspace{0.35\baselineskip}%
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}%
+  \setlength{\extrarowheight}{1.5pt}%
+  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.26\linewidth}>{\raggedright\arraybackslash}p{0.70\linewidth}@{}}%
+}
+\newcommand{\NotationTableEnd}{%
+  \end{tabular}%
+  \normalsize
+  \par\addvspace{0.25\baselineskip}%
+}
