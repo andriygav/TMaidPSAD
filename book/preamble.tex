@@ -55,8 +55,6 @@
 \usepackage{longtable}
 \usepackage{hyperref}
 \usepackage{xcolor}
-\usepackage{tcolorbox}
-\tcbuselibrary{skins,breakable,listings}
 
 \hypersetup{colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black}
 
@@ -103,31 +101,16 @@
 \newtheorem{definition}{Определение}[chapter]
 \newtheorem{remark}{Замечание}[chapter]
 
-\newtcblisting{codefragment}{
-  listing only,
-  listing options={
-    basicstyle=\small\ttfamily,
-    breaklines=true,
-    language=Python,
-  },
-  colback=gray!10,colframe=gray!50,breakable
-}
-
 \newcommand{\FigDir}{figures}
 \newcommand{\FigWidth}{0.92\linewidth}  % полная ширина иллюстрации на A5
 
 % Репозиторий курса ПСАД (данные лабораторных работ).
 \newcommand{\PSADRepo}{\url{https://github.com/andriygav/PSAD}}
 \newcommand{\PSADPath}[1]{\url{https://github.com/andriygav/PSAD/tree/master/#1}}
-
-% Карточка критерия (формат слайдов лекции: выборка, H_0, T, null, p).
-\newenvironment{critcard}[1]{%
-  \par\medskip\noindent\textbf{#1}\par\smallskip
-  \begingroup\footnotesize
-  \setlength{\tabcolsep}{4pt}%
-  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.71\linewidth}@{}}%
-}{%
-  \end{tabular}\endgroup\par\medskip
+% Вводная практики: семинар N, без путей к файлам (код --- в PSAD, не в книге).
+\newcommand{\PracticeIntro}[1]{%
+  Раздел сопровождает семинар~#1: что измерять, что построить, какой вывод сделать.%
+  Пошаговые вычисления и данные --- в материалах семинара курса (\PSADRepo{}).%
 }
 
 % Таблица обозначений: обычный tabular (tabularx ломается при \begin/\end в макросах).
